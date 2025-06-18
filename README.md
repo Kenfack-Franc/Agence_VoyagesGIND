@@ -1,4 +1,5 @@
-1. Introduction 
+1. Introduction
+   
 Le développement d’applications informatiques pour la gestion des entreprises est aujourd’hui un 
 enjeu central dans l’optimisation des processus administratifs et commerciaux. Dans ce cadre, le 
 présent projet vise à concevoir et implémenter une application Java permettant la gestion 
@@ -27,19 +28,27 @@ utilisateur. Il offre également un aperçu des possibilités de gestion mémoir
 collections dynamiques comme ArrayList. 
 Dans les sections suivantes, nous présenterons en détail l’analyse fonctionnelle de l’application, 
 la structure du code, les fonctionnalités clés, l’interface graphique, les choix techniques, ainsi que 
-les perspectives d’amélioration possibles. 
-2. Analyse fonctionnelle 
+les perspectives d’amélioration possibles.
+
+
+2. Analyse fonctionnelle
+
+   
 L’analyse fonctionnelle permet de définir les besoins auxquels le programme doit répondre, ainsi 
 que les fonctionnalités principales que l’application doit offrir à l’utilisateur. Dans ce projet, il 
 s'agit de développer une application de gestion d’agence de voyage avec une interface utilisateur 
 simple, accessible via des fenêtres interactives. L’utilisateur final est supposé être un agent 
 administratif ou un gestionnaire dans une agence. 
+
 2.1 Objectif général 
+
 L’objectif principal est de permettre à une agence de voyage de : 
  Gérer sa base de clients, 
  Gérer une liste de destinations de voyage, 
  Gérer les réservations des clients vers les destinations choisies. 
+
 2.2 Fonctionnalités attendues 
+
 L’application doit permettre à l’utilisateur : 
   
 Ajout d’un client 
@@ -69,7 +78,9 @@ o Nombre de personnes
 o Montant total 
  Quitter l'application 
 Fermeture propre de la fenêtre principale. 
+
 2.3 Contraintes et choix techniques 
+
  L’interface est développée en Java Swing, ce qui permet une interaction graphique 
 simple. 
  Les données sont maintenues en mémoire, à l’aide de ArrayList pour les listes de 
@@ -77,27 +88,37 @@ clients, de destinations, et de réservations.
  L’application ne nécessite pas de connexion Internet, ni de base de données externe. 
  L’ensemble des entités est géré par des classes séparées, selon les principes de la 
 programmation orientée objet. 
+
 2.4 Cas d'utilisation typique 
+
 Voici un scénario d’utilisation classique : 
 1. L’agent ouvre l’application. 
 2. Il ajoute un ou plusieurs clients. 
 3. Il enregistre les destinations proposées. 
 4. Un client souhaite effectuer une réservation. 
 5. L’agent choisit le client et la destination, indique le nombre de personnes, puis valide. 
-6. Il consulte la liste des réservations. 
-2.5 Améliorations envisagées 
+6. Il consulte la liste des réservations.
+   
+2.5 Améliorations envisagées
+   
  Sauvegarde des données dans un fichier texte ou une base de données. 
  Ajout d’un système de modification / suppression de clients ou de réservations. 
  Mise en place d’un système de recherche ou de tri des réservations. 
  Ajout d’un onglet statistique : nombre de clients, destinations les plus demandées, 
-chiffre d’affaires. 
-3. Structure du programme et architecture générale 
+chiffre d’affaires.
+
+
+3. Structure du programme et architecture générale
+
+   
 L’application "Agence de Voyage" est structurée de manière modulaire, en respectant les 
 principes fondamentaux de la programmation orientée objet (POO). Chaque entité du domaine 
 (client, destination, réservation) est représentée par une classe spécifique, tandis que la gestion de 
 l'interface utilisateur est centralisée dans une classe principale. Cette approche facilite la 
 maintenance, la lisibilité du code et l’évolution future de l’application. 
+
 3.1 Organisation globale 
+
 Le programme contient quatre classes principales : 
 Classe 
 Rôle 
@@ -109,7 +130,10 @@ Représente un lieu de voyage avec son coût
 Lie un client à une destination, en tenant compte du nombre de personnes 
 AgenceVoyageGUI Contient la fenêtre principale, les boutons, les événements, et les listes de 
 gestion 
-3.2 Diagramme structurel simplifié 
+
+3.2 Diagramme structurel simplifié
+
+   
 +--------------------+        +---------------------+        ------+ 
 +---------------
 |      Client        |        |    Destination      |        |     Reservation      
@@ -142,7 +166,9 @@ int  |
 | + faireReservation()        | 
 | + afficherReservations()    | 
 +-----------------------------+ 
+
 3.3 Rôle et responsabilité des classes 
+
 ➤ Client 
  Attributs : identifiant, nom, prénom, email 
  Utilisé pour stocker l’identité d’un voyageur 
@@ -164,18 +190,27 @@ o Ajouter une destination
 o Faire une réservation 
 o Voir les réservations 
 o Quitter 
+
 3.4 Gestion des identifiants 
+
 Chaque classe (client, destination, réservation) utilise un identifiant unique, généré 
 automatiquement grâce à un compteur statique (clientId, destinationId, reservationId) 
 pour éviter les doublons. 
+
 3.5 Données en mémoire 
+
  L’application ne fait appel à aucune base de données externe. 
  Toutes les informations sont stockées temporairement en mémoire vive via des objets 
 ArrayList. 
  Cela signifie que les données sont perdues à la fermeture du programme, ce qui peut 
-être amélioré dans une version future. 
-4. Détail des classes Java 
+être amélioré dans une version future.
+
+
+4. Détail des classes Java
+   
+   
 4.1 Classe Client – Représentation d’un client 
+
 class Client { 
 int id; 
 String nom, prenom, email; 
@@ -197,7 +232,9 @@ e-mail.
  Le constructeur Client(...) permet d’initialiser les valeurs dès la création d’un client. 
  toString() est une méthode Java spéciale : elle permet d’afficher le client sous forme de 
 texte lisible (ex : 1: Dupont Jean) dans les listes déroulantes. 
+
 4.2 Classe Destination – Représentation d’un lieu de voyage 
+
 class Destination { 
 int id; 
 String ville, pays; 
@@ -218,7 +255,9 @@ Explication :
  prix représente le coût par personne pour aller à cette destination. 
  toString() permet d’afficher les destinations de façon conviviale dans l’interface (2: 
 Rome, Italie - 200.0 €). 
+
 4.3 Classe Reservation – Gestion d’une réservation 
+
 class Reservation { 
 int id; 
 Client client; 
@@ -256,13 +295,19 @@ Stocker les informations d’un voyageur toString()
 Destination Stocker les données d’un lieu 
 toString() 
 Reservation Relier client + destination + personnes toString() 
-5. Classe AgenceVoyageGUI – Interface graphique et logique de 
+
+
+5. Classe AgenceVoyageGUI – Interface graphique et logique de
+
+   
 gestion 
 Cette classe est le cœur de l'application graphique. Elle gère : 
  L'affichage de la fenêtre principale, 
  Les boutons et leurs actions (ajouter client, destination, faire réservation...), 
  Les listes de stockage des objets (clients, destinations, réservations). 
+
 5.1 Déclaration des listes et compteurs 
+
 static java.util.List<Client> clients = new ArrayList<>(); 
 static java.util.List<Destination> destinations = new ArrayList<>(); 
 static java.util.List<Reservation> reservations = new ArrayList<>(); 
@@ -275,7 +320,9 @@ static int clientId = 1, destinationId = 1, reservationId = 1;
 �
 � Les compteurs clientId, destinationId, reservationId permettent de générer 
 automatiquement des identifiants uniques pour chaque nouvel objet. 
+
 5.2 Méthode main() – Lancement de l’application 
+
 public static void main(String[] args) { 
 JFrame frame = new JFrame("Agence de Voyage"); 
 frame.setSize(500, 400); 
@@ -286,7 +333,9 @@ frame.setLayout(new GridLayout(5, 1));
  Titre : "Agence de Voyage" 
  Taille : 500x400 pixels 
  Disposition : GridLayout(5,1) signifie 5 lignes verticales, 1 seule colonne. 
+
 5.3 Ajout des boutons et de leurs actions 
+
 JButton btnClient = new JButton("Ajouter un client"); 
 JButton btnDestination = new JButton("Ajouter une destination"); 
 JButton btnReservation = new JButton("Faire une réservation"); 
@@ -305,7 +354,9 @@ Chaque clic appelle la méthode associée :
  faireReservation() : permet de créer une réservation 
  afficherReservations() : affiche les réservations 
  System.exit(0) : quitte proprement le programme 
+
 5.4 Méthode ajouterClient() 
+
 JTextField nom = new JTextField(), prenom = new JTextField(), email = new 
 JTextField(); 
 Object[] message = { 
@@ -325,14 +376,18 @@ JOptionPane.showMessageDialog(null, "Client ajouté.");
  Le client est créé avec les infos remplies, 
  Ajouté à la liste clients, 
  Et un message de confirmation est affiché. 
+
 5.5 Méthode ajouterDestination() 
+
 Principe identique à ajouterClient() mais avec des champs : 
  Ville 
  Pays 
  Prix par personne (à convertir en double) 
 Conversion : 
 double p = Double.parseDouble(prix.getText()); 
+
 5.6 Méthode faireReservation() 
+
 Fonction clé du programme : 
 Client client = (Client) JOptionPane.showInputDialog(null, "Choisir un 
 client", ..., clients.toArray(), clients.get(0)); 
@@ -345,7 +400,9 @@ Puis il saisit le nombre de personnes :
 String input = JOptionPane.showInputDialog("Nombre de personnes:"); 
 int nb = Integer.parseInt(input); 
 Ensuite, la réservation est créée et ajoutée à la liste. 
+
 5.7 Méthode afficherReservations() 
+
 StringBuilder sb = new StringBuilder(); 
 for (Reservation r : reservations) { 
 sb.append(r.toString()).append("\n"); 
@@ -364,7 +421,11 @@ Fenêtre principale
 Boutons d'action 
 JOptionPane Boîtes de dialogues (saisie, liste, message) 
 GridLayout Mise en forme verticale des composants 
-Conclusion 
+
+
+6.Conclusion 
+
+
 Ce programme Java propose une solution simple mais fonctionnelle pour gérer une petite agence 
 de voyage à travers une interface graphique conçue avec Swing. Il permet l’enregistrement de 
 clients, la création de destinations, la gestion de réservations, et l’affichage récapitulatif des 
